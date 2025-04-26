@@ -12,23 +12,28 @@
 #define ADC_PIN 28 // GPIO para o voltímetro
 #define Botao_A 5  // GPIO para botão A
 
+int R_conhecido = 10000;   // Resistor de 10k ohm
+float R_x = 0.0;           // Resistor desconhecido
+float ADC_VREF = 3.31;     // Tensão de referência do ADC
+int ADC_RESOLUTION = 4095; // Resolução do ADC (12 bits)
 
+// Trecho para modo BOOTSEL com botão B
+#include "pico/bootrom.h"
+#define botaoB 6
+void gpio_irq_handler(uint gpio, uint32_t events)
+{
+    if(gpio == botaoB){
+        reset_usb_boot(0, 0);
+    }
+}
 
 int main()
 {
-    stdio_init_all();
+  // Para ser utilizado o modo BOOTSEL com botão B
+  gpio_init(botaoB);
+  gpio_set_dir(botaoB, GPIO_IN);
+  gpio_pull_up(botaoB);
+  gpio_set_irq_enabled_with_callback(botaoB, GPIO_IRQ_EDGE_FALL, true, &gpio_irq_handler);
+  // Aqui termina o trecho para modo BOOTSEL com botão B
 
-    // I2C Initialisation. Using it at 400Khz.
-    i2c_init(I2C_PORT, 400*1000);
-    
-    gpio_set_function(I2C_SDA, GPIO_FUNC_I2C);
-    gpio_set_function(I2C_SCL, GPIO_FUNC_I2C);
-    gpio_pull_up(I2C_SDA);
-    gpio_pull_up(I2C_SCL);
-    // For more examples of I2C use see https://github.com/raspberrypi/pico-examples/tree/master/i2c
-
-    while (true) {
-        printf("Hello, world!\n");
-        sleep_ms(1000);
-    }
 }
