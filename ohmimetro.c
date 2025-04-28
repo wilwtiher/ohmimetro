@@ -119,7 +119,7 @@ int main()
     ssd1306_line(&ssd, 3, 34, 123, 34, cor);           // Desenha uma linha
     ssd1306_draw_string(&ssd, "Ohmimetro", 8, 6); // Desenha uma string
     ssd1306_draw_string(&ssd, "Resistencia:", 8, 16);  // Desenha uma string
-    ssd1306_draw_string(&ssd, str_x, 8, 26);  // Desenha uma string
+    ssd1306_draw_string(&ssd, str_y, 8, 26);  // Desenha uma string
     ssd1306_draw_string(&ssd, "Codig. de cor:", 8, 36);          // Desenha uma string
     // codigo de cores
     ssd1306_draw_string(&ssd, cores[digito1], 8, 45);    // Desenha uma string
@@ -128,7 +128,7 @@ int main()
     ssd1306_draw_string(&ssd, ",", 95, 45);    // Desenha uma string
     ssd1306_draw_string(&ssd, cores[ordem], 8, 54);    // Desenha uma string
     ssd1306_draw_string(&ssd, ",", 47, 54);    // Desenha uma string
-    ssd1306_draw_string(&ssd, "Dourado.", 56, 54);    // Desenha uma string
+    ssd1306_draw_string(&ssd, "Ouro.", 56, 54);    // Desenha uma string
     /*
     ssd1306_line(&ssd, 44, 37, 44, 60, cor);           // Desenha uma linha vertical
     ssd1306_draw_string(&ssd, str_x, 8, 52);           // Desenha uma string
