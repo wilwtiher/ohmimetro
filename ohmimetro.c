@@ -48,6 +48,7 @@ int main()
   gpio_set_irq_enabled_with_callback(botaoB, GPIO_IRQ_EDGE_FALL, true, &gpio_irq_handler);
   // Aqui termina o trecho para modo BOOTSEL com botão B
 
+  stdio_init_all();
   
   gpio_init(Botao_A);
   gpio_set_dir(Botao_A, GPIO_IN);
@@ -114,26 +115,27 @@ int main()
     //  Atualiza o conteúdo do display com animações
     ssd1306_fill(&ssd, !cor);                          // Limpa o display
     ssd1306_rect(&ssd, 3, 3, 122, 60, cor, !cor);      // Desenha um retângulo
-    ssd1306_line(&ssd, 3, 25, 123, 25, cor);           // Desenha uma linha
-    ssd1306_line(&ssd, 3, 37, 123, 37, cor);           // Desenha uma linha
+    ssd1306_line(&ssd, 3, 24, 123, 24, cor);           // Desenha uma linha
+    ssd1306_line(&ssd, 3, 34, 123, 34, cor);           // Desenha uma linha
     ssd1306_draw_string(&ssd, "Ohmimetro", 8, 6); // Desenha uma string
-    ssd1306_draw_string(&ssd, "Resistenc.", 8, 16);  // Desenha uma string
-    ssd1306_draw_string(&ssd, str_y, 8, 26);  // Desenha uma string
-    ssd1306_draw_string(&ssd, "Codig. de cor", 8, 36);          // Desenha uma string
+    ssd1306_draw_string(&ssd, "Resistencia:", 8, 16);  // Desenha uma string
+    ssd1306_draw_string(&ssd, str_x, 8, 26);  // Desenha uma string
+    ssd1306_draw_string(&ssd, "Codig. de cor:", 8, 36);          // Desenha uma string
     // codigo de cores
-    ssd1306_draw_string(&ssd, cores[digito1], 8, 46);    // Desenha uma string
-    ssd1306_draw_string(&ssd, ",", 48, 46);    // Desenha uma string
-    ssd1306_draw_string(&ssd, cores[digito2], 54, 46);    // Desenha uma string
-    ssd1306_draw_string(&ssd, ",", 94, 46);    // Desenha uma string
-    ssd1306_draw_string(&ssd, cores[ordem], 8, 56);    // Desenha uma string
-    ssd1306_draw_string(&ssd, ",", 48, 46);    // Desenha uma string
-    ssd1306_draw_string(&ssd, "dourado.", 54, 46);    // Desenha uma string
+    ssd1306_draw_string(&ssd, cores[digito1], 8, 45);    // Desenha uma string
+    ssd1306_draw_string(&ssd, ",", 47, 45);    // Desenha uma string
+    ssd1306_draw_string(&ssd, cores[digito2], 56, 45);    // Desenha uma string
+    ssd1306_draw_string(&ssd, ",", 95, 45);    // Desenha uma string
+    ssd1306_draw_string(&ssd, cores[ordem], 8, 54);    // Desenha uma string
+    ssd1306_draw_string(&ssd, ",", 47, 54);    // Desenha uma string
+    ssd1306_draw_string(&ssd, "Dourado.", 56, 54);    // Desenha uma string
     /*
     ssd1306_line(&ssd, 44, 37, 44, 60, cor);           // Desenha uma linha vertical
     ssd1306_draw_string(&ssd, str_x, 8, 52);           // Desenha uma string
     ssd1306_draw_string(&ssd, str_y, 59, 52);          // Desenha uma string
     */
-    printf("Resistencia: %c\n", str_y);
+    printf("Resistencia: %f\n", R_x);
+    printf("Adc: %f\n", media);
     printf("Codigo de cor: %c, %c, %c\n", cores[digito1], cores[digito2], cores[ordem]);
     ssd1306_send_data(&ssd);                           // Atualiza o display
     sleep_ms(700);
