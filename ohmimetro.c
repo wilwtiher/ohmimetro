@@ -133,6 +133,8 @@ int main()
     ssd1306_draw_string(&ssd, str_x, 8, 52);           // Desenha uma string
     ssd1306_draw_string(&ssd, str_y, 59, 52);          // Desenha uma string
     */
+    printf("Resistencia: %c\n", str_y);
+    printf("Codigo de cor: %c, %c, %c\n", cores[digito1], cores[digito2], cores[ordem]);
     ssd1306_send_data(&ssd);                           // Atualiza o display
     sleep_ms(700);
   }
